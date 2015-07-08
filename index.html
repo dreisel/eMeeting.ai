@@ -4,103 +4,483 @@
     <title>PubRTC + Mobile</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-	    #vid-box, #vid-thumb {
-		    text-align: center;
-	    }
-	    
-	    #vid-box video {
-		    margin 0 auto;
-		    width: 300px;
-	    }
 
-	    #vid-thumb, #vid-thumb video{
-		    width: 200px;
-		    display: block;
-		    margin: 0 auto;
-	    }
-    </style>
-    
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
+    <script src="js/modernizr.custom.js"></script>
+	<link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" />
+	<style>
+		#vid-box{
+			display: inline-block;
+			text-align:center;
+			width:100%;
+		}
+		#vid-box video{
+			width:100%;
+		}
+	</style>
 </head>
 <body>
+<style>
+    #emotionList {
+        font-family: 'Ubuntu', sans-serif;
+        width: 318px;
+    }
+
+    #emotionList p{
+        color:#525252;
+        font-size:12px;
+    }
+
+    .emotion {
+        height: 30px;
+        float: left;
+    }
+
+    .emotionContainer {
+        padding-bottom: 1px;
+    }
+    .skillbar {
+        margin-left: 30px;	position:relative;
+        display:block;
+        margin-bottom:15px;
+        width:250px;
+        background:#eee;
+        height:25px;
+        border-radius:3px;
+        -moz-border-radius:3px;
+        -webkit-border-radius:3px;
+        -webkit-transition:0.4s linear;
+        -moz-transition:0.4s linear;
+        -ms-transition:0.4s linear;
+        -o-transition:0.4s linear;
+        transition:0.4s linear;
+        -webkit-transition-property:width, background-color;
+        -moz-transition-property:width, background-color;
+        -ms-transition-property:width, background-color;
+        -o-transition-property:width, background-color;
+        transition-property:width, background-color;
+    }
+
+    .skillbar-title {
+        position:absolute;
+        top:0;
+        left:0;
+        width:110px;
+        font-weight:bold;
+        font-size:13px;
+        color:#363636;
+        background:#6adcfa;
+        -webkit-border-top-left-radius:3px;
+        -webkit-border-bottom-left-radius:4px;
+        -moz-border-radius-topleft:3px;
+        -moz-border-radius-bottomleft:3px;
+        border-top-left-radius:3px;
+        border-bottom-left-radius:3px;
+    }
+
+    .skillbar-title span {
+        display:block;
+        /*background:rgba(0, 0, 0, 0.1);*/
+        background: transparent;
+        padding:0 20px;
+        height:25px;
+        line-height:25px;
+        -webkit-border-top-left-radius:3px;
+        -webkit-border-bottom-left-radius:3px;
+        -moz-border-radius-topleft:3px;
+        -moz-border-radius-bottomleft:3px;
+        border-top-left-radius:3px;
+        border-bottom-left-radius:3px;
+    }
+
+    .skillbar-bar {
+        height:25px;
+        width:0px;
+        background:#6adcfa;
+        border-radius:3px;
+        -moz-border-radius:3px;
+        -webkit-border-radius:3px;
+    }
+
+    .skill-bar-percent {
+        position:absolute;
+        right:10px;
+        top:0;
+        font-size:11px;
+        height:25px;
+        line-height:25px;
+        color:#ffffff;
+        color:rgba(0, 0, 0, 0.4);
+    }
+</style>
+<div class = "bodyDiv">
 
 <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
 <!-- My Phone Number & Dial Areas -->
 <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
-<div id="vid-box"></div>
-<div id="vid-thumb"></div>
+    <div id="videoContainer" style="display: flex;flex-direction: row-reverse;">
+        <div id="vid-box" class="video2"></div>
+        <div id="emotionList" style="display: none">
+            <div style="display: flex; height: 100vh;">
+                <div style="
+    flex: 1 1 auto;
+    overflow: auto;">
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/fSFcSq3.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Anger</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/IRllNOR.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Contempt</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/36703fT.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Disgust</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/wHpDDoI.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Fear</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/hxide9c.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Happiness</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/CX7mIEe.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Neutral</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/fyeFBAo.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Sadness</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="emotionContainer">
+                        <img src="http://i.imgur.com/2kriI7j.png" class="emotion" />
+                    </div>
+                    <div class="skillbar clearfix " data-percent="0%">
+                        <div class="skillbar-title" style="background: transparent;"><span>Surprise</span></div>
+                        <div class="skillbar-bar" style="background: #03A9F4;"></div>
+                        <div class="skill-bar-percent">0%</div>
+                    </div>
+                    <!-- End Skill Bar -->
+                </div>
+            </div>
+        </div>
 
-<form name="loginForm" id="login" action="#" onsubmit="return login(this);">
-    <input type="text" name="username" id="username" placeholder="Pick a username!" />
-    <input type="submit" name="login_submit" value="Log In">
-</form>
+    </div>
+	<div id="vid-thumb" ></div>
+
+    <div id="beforeLogin">
+        <p style="color: #363636; font-size: xx-large; font-family: 'Helvetica Neue W01 45 Light' ">Login to start the therapy session</p>
+
+        <form name="loginForm" id="login" action="#" onsubmit="return errWrap(login,this);">
+        <span class="input input--nao">
+            <input class="input__field input__field--nao" type="text" name="username" id="username" style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: none; border-bottom: 2px solid #19A2C6;" placeholder="Username"/>
+                <label class="input__label input__label--nao" for="username">
+                    <span class="input__label-content input__label-content--nao">
+                    </span>
+                </label>
+
+            <input class="input__field input__field--nao" type="password"  id="password" placeholder="Password" style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: none; border-bottom: 2px solid #19A2C6;" placeholder="Username"/>
+        </span>
+            <br>
+        <button class="cbutton cbutton--effect-radomir" type="submit" name="login_submit" value="Log In" style="margin-top: 40px; margin-left:-10px">
+            <i class="cbutton__icon fa fa-fw fa fa-sign-in"></i>
+        </button>
+    </form>
+    </div>
+
+    <script>
+
+    </script>
+    <div id="afterLoginTherapist"  style="display:none;" >
+
+        <form name="callForm" id="call2" action="#" onsubmit="return errWrap(makeCall,this);">
+        <span class="input input--nao">
+            <input class="input__field input__field--nao" type="text" name="number" id="call" placeholder="Client Name" style="width: 100%; padding: 12px 20px; margin: 8px 0; box-sizing: border-box; border: none; border-bottom: 2px solid #19A2C6;" placeholder="Username"/>
+
+					<label class="input__label input__label--nao">
+						<span class="input__label-content input__label-content--nao">
+                        </span>
+					</label>
+
+        </span>
+        <button class="cbutton cbutton--effect-radomir md-trigger" type="submit" value="Call" style="margin-top: 40px; margin-left:-10px" data-modal="modal-13">
+            <i class="cbutton__icon fa fa-fw fa fa fa-phone-square"></i>
+        </button>
+	</form>
 
 
-<form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
-	<input type="text" name="number" placeholder="Enter user to dial!" />
-	<input type="submit" value="Call"/>
-</form>
+	<div id="inCall" class="ptext">
+		<button id="end" onclick="end()" >End</button>
+        <button id="mute" onclick="mute()">Mute</button>
+	</div>
 
-<div id="inCall">
-	<button onclick="end()">End</button> <button onclick="mute()">Mute</button>
+	<div id="logs" style="display: none" class="ptext"></div>
+
 </div>
-<div id="logs"></div>
 
-<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <div id="afterLoginClient"  style="display:none;" >
+            <p style="color: #363636; font-size: xx-large; font-family: 'Helvetica Neue W01 45 Light' ">A therapist will call you soon...</p>
+        </div>
+
+</div>
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
 <!-- WebRTC Peer Connections -->
 <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdn.pubnub.com/pubnub-dev.js"></script>
+<script src="https://cdn.pubnub.com/pubnub.min.js"></script>
 <script src="js/webrtc.js"></script>
 <script src="js/rtc-controller.js"></script>
-
 <script type="text/javascript">
+    var isClient = false;
+    var isTherapist = false;
+    var video_out = document.getElementById("vid-box");
+    var vid_thumb = document.getElementById("vid-thumb");
+    var vidCount  = 0;
+    var canvas = document.createElement('canvas');
+    var photo = document.createElement('img');
+    var interval = 0;
+    var keys = [];
+    $.ajax({
+        url: "keys.json"
+    })
+    .done(function (data) {
+        if (data)
+            keys = data.keys;
+            console.log(keys)
+    });
+    var emotionMap = ['anger', 'contempt', 'disgust', 'fear', 'happiness', 'neutral', 'sadness', 'surprise']
+    function updateEmotions(obj) {
 
-var video_out = document.getElementById("vid-box");
-var vid_thumb = document.getElementById("vid-thumb");
+        console.log(obj);
+        jQuery('.skillbar').each(function(i, e){
+            var percent =  obj.scores[emotionMap[i]];
+            percent = Math.floor(percent * 100);
+            jQuery(this).find('.skill-bar-percent').text(percent);
+            jQuery(this).attr('data-percent',percent);
+            jQuery(this).find('.skillbar-bar').animate({
+                width:Math.floor(jQuery(this).attr('data-percent') * 2.5)
+            },500);
+        });
+    }
 
-function login(form) {
-	var phone = window.phone = PHONE({
-	    number        : username.value || "Anonymous", // listen on username line else Anonymous
-	    publish_key   : 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
-	    subscribe_key : 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
-	});
-	var ctrl = window.ctrl = CONTROLLER(phone);
-	ctrl.ready(function(){
-		form.username.style.background="#55ff5b"; 
-		form.login_submit.hidden="true"; 
-		ctrl.registerThumbnailHolder(vid_thumb);
-		addLog("Logged in as " + username.value); 
-	});
-	ctrl.receive(function(session){
-	    session.connected(function(session){ video_out.appendChild(session.video); addLog(session.number + " has joined."); }); //ctrl.postAuth(session, auth, newCall) });
-	    session.ended(function(session) { $('*[data-number="'+session.number+'"]').remove(); addLog(session.number + " has left."); });
-	});
-	return false;
-}
 
-function makeCall(form){
-	if (!window.phone) alert("Login First!");
-	var num = form.number.value;
-	if (phone.number()==num) return false; // No calling yourself!
-	ctrl.isOnline(num, function(isOn){
-		if (isOn) ctrl.dial(num);
-		else alert("User if Offline");
-	});
-	return false;
-}
+    function startRecognition(video){
+        interval = window.setInterval(
+            function () {
+                console.log('taking pic');
+                takepicture(video);
+            }, 1500
+        )
+    }
+    function stopRecognition(video) {
+        window.clearInterval(interval);
+    }
 
-function mute(){
-	ctrl.toggleMute();
-}
 
-function end(){
-	ctrl.hangup();
-}
+    var i = 0;
 
-function addLog(log){
-	$('#logs').append("<p>"+log+"</p>");
-}
+    function takepicture(video) {
+        var context = canvas.getContext('2d');
+        var tmp = $("#vid-box");
+//    console.log(tmp, tmp.width , tmp.height);
+        var width = tmp.width();
+        var height = tmp.height();
+        if (width && height) {
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+            var data = canvas.toDataURL('image/png');
+            $.ajax({
+                url: "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize",
+                beforeSend: function (xhrObj) {
+                    // Request headers
+                    xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+                    xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", keys[i]);
+                    console.log("used key:",keys[i]);
+                    i = (i + 1) % keys.length;
+                },
+                type: "POST",
+                data: makeblob(data),
+                processData: false
+            })
+                .done(function (data) {
+                    if (data.length)
+                        updateEmotions(data[0]);
+                })
+                .fail(function (error) {
+                    console.log(error, error.getAllResponseHeaders());
+                });
+        }
+    }
+
+    function makeblob(dataURL) {
+        var BASE64_MARKER = ';base64,';
+        if (dataURL.indexOf(BASE64_MARKER) == -1) {
+            var parts = dataURL.split(',');
+            var contentType = parts[0].split(':')[1];
+            var raw = decodeURIComponent(parts[1]);
+            return new Blob([raw], {type: contentType});
+        }
+        var parts = dataURL.split(BASE64_MARKER);
+        var contentType = parts[0].split(':')[1];
+        var raw = window.atob(parts[1]);
+        var rawLength = raw.length;
+
+        var uInt8Array = new Uint8Array(rawLength);
+
+        for (var i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+
+        return new Blob([uInt8Array], {type: contentType});
+    }
+
+    function login(form) {
+
+
+        if (form.username.value == "daniel")
+            isTherapist = true;
+        else
+            isClient = true;
+
+        if (isTherapist) {
+            document.getElementById('beforeLogin').style.display = "none";
+            document.getElementById('afterLoginTherapist').style.display = "block";
+            document.getElementById('afterLoginClient').style.display = "none";
+        }
+        else {
+            document.getElementById('beforeLogin').style.display = "none";
+            document.getElementById('afterLoginTherapist').style.display = "none";
+            document.getElementById('afterLoginClient').style.display = "block";
+        }
+
+        var phone = window.phone = PHONE({
+            number: form.username.value || "Anonymous", // listen on username line else Anonymous
+            publish_key: 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
+            subscribe_key: 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
+
+            ssl: true
+        });
+        var ctrl = window.ctrl = CONTROLLER(phone);
+        ctrl.ready(function () {
+            ctrl.addLocalStream(vid_thumb);
+            addLog("Logged in as " + form.username.value);
+        });
+        ctrl.receive(function (session) {
+            session.connected(
+                function (session) {
+                    video_out.appendChild(session.video);
+                    if (isTherapist) {
+                        document.getElementById('emotionList').style.display = "block";
+                        startRecognition(session.video);
+                        addLog(session.number + " has joined.");
+                        vidCount++;
+                    }
+                }
+            );
+            session.ended(
+                function (session) {
+                    stopRecognition(session.video);
+                    ctrl.getVideoElement(session.number).remove();
+                    addLog(session.number + " has left.");
+                    vidCount--;
+                });
+        });
+        ctrl.videoToggled(
+            function (session, isEnabled) {
+                ctrl.getVideoElement(session.number).toggle(isEnabled);
+                addLog(session.number + ": video enabled - " + isEnabled);
+            }
+        );
+        ctrl.audioToggled(
+            function (session, isEnabled) {
+                ctrl.getVideoElement(session.number).css("opacity", isEnabled ? 1 : 0.75);
+                addLog(session.number + ": audio enabled - " + isEnabled);
+            });
+        return false;
+    }
+
+    function makeCall(form) {
+        if (!window.phone) alert("Login First!");
+        var num = form.number.value;
+        if (phone.number() === num) return false; // No calling yourself!
+        ctrl.isOnline(num, function (isOn) {
+            if (isOn) ctrl.dial(num);
+            else alert("User if Offline");
+        });
+        return false;
+    }
+
+    function mute() {
+        var audio = ctrl.toggleAudio();
+        if (!audio) $("#mute").html("Unmute");
+        else $("#mute").html("Mute");
+    }
+
+    function end() {
+        ctrl.hangup();
+    }
+
+    function pause() {
+        var video = ctrl.toggleVideo();
+        if (!video) $('#pause').html('Unpause');
+        else $('#pause').html('Pause');
+    }
+
+    function getVideo(number) {
+        return $('*[data-number="' + number + '"]');
+    }
+
+    function addLog(log) {
+        console.log(log);
+    }
+
+    function errWrap(fxn, form) {
+        try {
+            return fxn(form);
+        } catch (err) {
+            alert("WebRTC is currently only supported by Chrome, Opera, and Firefox");
+            return false;
+        }
+    }
+
 
 </script>
 </body>
